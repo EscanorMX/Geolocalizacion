@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<!-- <button onclick="getLocation()">Try It</button> -->
+
+<p id="demo"></p>
+<p id="error"></p>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+
+/* setInterval('contador()',30000); 
+
+
+https://es.stackoverflow.com/questions/51946/cu%C3%A1l-es-la-diferencia-entre-window-onload-y-document-ready/51961
+
+Si vamos a trabajar con los elementos que componen la web (divs, inputs, …) usaremos $(document).ready(). Pero, si por el contrario, vamos a trabajar con imágenes para alinearlas o comprobar sus dimensiones tendremos que usar $(window).load().
+
+Es un error muy extendido usar $(window).load() cuando vamos a trabajar solo con elementos del DOM, o usar  $(document).ready() cuando vamos a trabajar con elementos que no estarán cargados al momento de ejecutarse dicha función.
+
+*/
+
+ $(function() {
+
+        console.log( "Ha ocurrido document.ready: documento listo" );
+        getLocation()
+    });
+ 
+    $( window ).on( "load", function() {
+        console.log( "Ha ocurrido window.load: ventana lista" );
+    });
+
+function contador() {
+ 
+    alert("Hola")
+
+}
+
+var x = document.getElementById("demo");
+var y = document.getElementById("error");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(showPosition, showError);
+  } else { 
+    y.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+    
+function showPosition(position) {
+    x.innerHTML="" + position.coords.latitude + 
+    "," + position.coords.longitude;
+}
+
+function showError(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      y.innerHTML = "User denied the request for Geolocation."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      y.innerHTML = "Location information is unavailable."
+      break;
+    case error.TIMEOUT:
+      y.innerHTML = "The request to get user location timed out."
+      break;
+    case error.UNKNOWN_ERROR:
+      y.innerHTML = "An unknown error occurred."
+      break;
+  }
+}
+
+</script>
+
+</body>
+</html>

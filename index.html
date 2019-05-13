@@ -51,6 +51,9 @@ function getLocation() {
 function showPosition(position) {
     x.innerHTML="" + position.coords.latitude + 
     "," + position.coords.longitude;
+ 
+ window.parent.document.getElementById("demo2") = position.coords.latitude + 
+    "," + position.coords.longitude;
 }
 
 function showError(error) {
